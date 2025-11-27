@@ -47,8 +47,6 @@ def get_user_input():
 
     except (ValueError, TypeError) as e:
         print(f"Input Error: {e}")
-    except Exception:
-        print("Unexpected error while reading input.")
 
     return None, None, None
 
@@ -78,11 +76,7 @@ def run_app():
         return -1
 
     # Calculate cost
-    try:
-        total_cost = calculate_total_cost(plan, features, members)
-    except Exception as e:
-        print(f"Calculation Error: {e}")
-        return -1
+    total_cost = calculate_total_cost(plan, features, members)
 
     # Confirm with user
     print("\n--- CONFIRMATION ---")
@@ -101,9 +95,9 @@ def run_app():
 
 
 if __name__ == "__main__":
-    result = run_app()
+    RESULT = run_app()
 
     # Requirement 7: return specific exit codes
     import sys
 
-    sys.exit(0 if result != -1 else 1)
+    sys.exit(0 if RESULT != -1 else 1)
