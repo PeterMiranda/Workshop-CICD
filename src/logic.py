@@ -17,11 +17,9 @@ def validate_selection(plan_name, features):
     """
     if plan_name not in MEMBERSHIP_PLANS:
         return False, f"Error: Plan '{plan_name}' does not exist."
-    
     for feature in features:
         if feature not in ADDITIONAL_FEATURES:
-            return False, f"Error: Feature '{feature}' is not available."
-            
+            return False, f"Error: Feature '{feature}' is not available."           
     return True, ""
 
 def calculate_total_cost(plan_name, features, member_count):
@@ -37,28 +35,23 @@ def calculate_total_cost(plan_name, features, member_count):
         int: The final calculated cost.
     """
     # 1. Base Cost
-    base_cost = MEMBERSHIP_PLANS[plan_name]["base_cost"]
-    
+    base_cost = MEMBERSHIP_PLANS[plan_name]["base_cost"]    
     # 2. Features Cost
     features_cost = sum(ADDITIONAL_FEATURES[f]["cost"] for f in features)
-    
     # Subtotal per person (This assumption implies features are per membership group)
     # Adjust logic here if features are charged per person individually.
     # Assumption: The base plan covers the group if it's "Family", 
     # but strictly following the prompt: "If two or more members sign up... apply discount"
     # Usually implies: (Base + Features) * Members * Discount. 
     # Let's assume the cost calculated is for the entire billing group.
-    
-    raw_total = (base_cost + features_cost)
+    raw_total = base_cost + features_cost
     if plan_name != "Family":
         # If it's not a family plan, we assume cost is per person
         raw_total = raw_total * member_count
-    
     # 3. Discounts for Group Memberships (Req 2)
     current_total = raw_total
     if member_count >= GROUP_DISCOUNT_THRESHOLD:
         current_total -= (current_total * GROUP_DISCOUNT_RATE)
-
     # 4. Premium Membership Features Surcharge (Req 4)
     # Check if any selected feature is premium
     has_premium_feature = any(ADDITIONAL_FEATURES[f]["is_premium"] for f in features)
@@ -75,8 +68,6 @@ def calculate_total_cost(plan_name, features, member_count):
         if current_total > offer["threshold"]:
             discount_amount = offer["discount"]
             break # Apply only the highest applicable discount
-            
     current_total -= discount_amount
-
     # Ensure output is integer and positive
     return int(current_total)
