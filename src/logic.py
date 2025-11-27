@@ -19,7 +19,7 @@ def validate_selection(plan_name, features):
         return False, f"Error: Plan '{plan_name}' does not exist."
     for feature in features:
         if feature not in ADDITIONAL_FEATURES:
-            return False, f"Error: Feature '{feature}' is not available."           
+            return False, f"Error: Feature '{feature}' is not available."
     return True, ""
 
 def calculate_total_cost(plan_name, features, member_count):
