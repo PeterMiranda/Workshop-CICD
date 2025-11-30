@@ -1,7 +1,7 @@
 """
 Business logic for Gym Membership calculations.
 """
-from config import (
+from src.config import (
     MEMBERSHIP_PLANS,
     ADDITIONAL_FEATURES,
     GROUP_DISCOUNT_THRESHOLD,
