@@ -1,7 +1,7 @@
 """
 Unit tests for Gym Logic validation and calculation.
 """
-from logic import calculate_total_cost, validate_selection
+from src.logic import calculate_total_cost, validate_selection
 
 # Test Validation
 def test_validation_success():
