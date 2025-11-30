@@ -4,8 +4,8 @@ Provides user interaction for selecting membership plans,
 optional additional features, and calculating subscription costs.
 """
 
-from config import MEMBERSHIP_PLANS, ADDITIONAL_FEATURES
-from logic import calculate_total_cost, validate_selection
+from src.config import MEMBERSHIP_PLANS, ADDITIONAL_FEATURES
+from src.logic import calculate_total_cost, validate_selection
 
 
 def display_menu():
